@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.products.models import Product, ProductImage, Category, Wishlist
+from apps.products.models import Product, ProductImage, Category, Wishlist, Order
 
 
 class ProductImageModelSerializer(ModelSerializer):
@@ -29,3 +29,7 @@ class WishListModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class OrderModelSerializer(ModelSerializer):
+    class Meta:
+        model = Order
+        exclude = ('id',)

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Model, CharField, IntegerField, TextField, ForeignKey, CASCADE, ImageField, DateTimeField
 from mptt.fields import TreeForeignKey
@@ -44,4 +45,9 @@ class Wishlist(Model):
     user = ForeignKey('auth.User', CASCADE)
     created_at = DateTimeField(auto_now=True)
 
+
+class Order(Model):
+    user = ForeignKey('auth.User', CASCADE)
+    product = ForeignKey(Product, CASCADE, 'order')
+    quantity = IntegerField(default=1)
 
