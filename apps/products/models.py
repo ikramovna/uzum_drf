@@ -74,3 +74,12 @@ class City(Model):
 
     def __str__(self):
         return self.name
+
+
+class ViewedProduct(Model):
+    user = ForeignKey('auth.User', CASCADE)
+    product = ForeignKey('Product', CASCADE)
+    timestamp = DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user

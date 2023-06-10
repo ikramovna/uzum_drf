@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.generics import (ListCreateAPIView, RetrieveAPIView, get_object_or_404, CreateAPIView)
@@ -5,9 +6,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import (ModelViewSet)
 
-from apps.products.models import (Product, Category, Wishlist, Order)
+from apps.products.models import (Product, Category, Wishlist, Order, ViewedProduct)
 from apps.products.serializers import (ProductModelSerializer, CategoryModelSerializer, WishListModelSerializer,
-                                       OrderModelSerializer)
+                                       OrderModelSerializer, ViewedProductSerializer)
 
 
 # Product
