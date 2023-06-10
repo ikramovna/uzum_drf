@@ -23,6 +23,7 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     'mptt',
     'parler',
+    'modeltranslation',
 
 ]
 
@@ -102,22 +103,24 @@ USE_I18N = True
 
 USE_TZ = True
 
-PARLER_LANGUAGES = {
-    None: (
-        {'code': 'uz', },
-        {'code': 'ru', },
-    ),
-    'default': {
-        'fallbacks': ['uz'],
-        'hide_untranslated': False,
-    }
-}
+LANGUAGES = (
+    ('en', 'English'),
+    ('ru', 'Russian'),
+    ('uz', 'Uzbek'),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR / 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
+
+MODELTRANSLATION_LANGUAGES = ('ru', 'en', 'uz')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
