@@ -1,5 +1,7 @@
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.generics import (ListCreateAPIView, RetrieveAPIView, get_object_or_404, CreateAPIView)
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import (ModelViewSet)
 
@@ -12,6 +14,48 @@ from apps.products.serializers import (ProductModelSerializer, CategoryModelSeri
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
+    pagination_class = PageNumberPagination
+
+    # Similar products
+    @action(detail=True, methods=['GET'])
+    def similar_products(self, request, pk=None):
+        product = self.get_object()
+        similar_products = Product.objects.filter(category=product.category)[:5]
+        serializer = ProductModelSerializer(similar_products, many=True)
+        return Response(serializer.data)
+
+    # Products viewed
+    @action(detail=True, methods=['POST'])
+    def mark_viewed(self, request, pk=None):
+        product = self.get_object()
+
+        user = request.user
+
+        viewed_product = ViewedProduct(user=user, product=product)
+        viewed_product.save()
+
+        serializer = ViewedProductSerializer(viewed_product)
+        return Response(serializer.data)
+
+    # discount
+    @action(detail=True, methods=['POST'])
+    def add_discount(self, request, pk=None):
+        product = self.get_object()
+        discount = request.data.get('discount')
+
+        product.price -= discount
+        product.save()
+
+        serializer = self.get_serializer(product)
+        return Response(serializer.data)
+
+    # cache
+    def list(self, request, *args, **kwargs):
+        if cache.get('data') is None:
+            cache.set('data', self.get_queryset(), timeout=60)
+            return Response(self.get_serializer(self.get_queryset(), many=True).data)
+        else:
+            return Response(self.get_serializer(cache.get('data'), many=True).data)
 
 
 class ProductDetailRetrieveAPIView(RetrieveAPIView):
