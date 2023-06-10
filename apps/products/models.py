@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.db.models import Model, CharField, IntegerField, TextField, ForeignKey, CASCADE, ImageField, DateTimeField
+from django.db.models import Model, CharField, IntegerField, TextField, ForeignKey, CASCADE, ImageField, DateTimeField, \
+    Index
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
@@ -19,11 +20,11 @@ class ProductImage(Model):
     def __str__(self):
         return self.products.title
 
-
 class Product(Model):
     title = CharField(max_length=150)
     price = IntegerField()
-    description = TextField(blank=True, null=True)
+    short_description = TextField(blank=True, null=True)
+    long_description = TextField(blank=True, null=True)
     discount = IntegerField(null=True, blank=True)
     quantity = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
@@ -31,8 +32,10 @@ class Product(Model):
     category = ForeignKey('Category', CASCADE)
     owner = ForeignKey('auth.User', CASCADE)
 
-    def __str__(self):
-        return self.title
+    class Meta:
+        indexes = [
+            Index(fields=['title', 'long_description', 'short_description'])
+        ]
 
     @property
     def discount_price(self):
@@ -40,7 +43,7 @@ class Product(Model):
 
 
 class Wishlist(Model):
-    product = ForeignKey('apps.Product', CASCADE)
+    product = ForeignKey('Product', CASCADE)
     user = ForeignKey('auth.User', CASCADE)
     created_at = DateTimeField(auto_now=True)
 
@@ -55,5 +58,3 @@ class Basket(Model):
     product = ForeignKey(Product, CASCADE, 'baskets')
     quantity = IntegerField(default=1)
     user = ForeignKey('auth.User', on_delete=CASCADE)
-
-
