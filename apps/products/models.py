@@ -9,6 +9,11 @@ class Category(MPTTModel):
     name = CharField(max_length=150)
     parent = TreeForeignKey('self', CASCADE, 'children', null=True, blank=True)
 
+    class Meta:
+        indexes = [
+            Index(fields=['name'])
+        ]
+
     def __str__(self):
         return self.name
 
@@ -19,6 +24,7 @@ class ProductImage(Model):
 
     def __str__(self):
         return self.products.title
+
 
 class Product(Model):
     title = CharField(max_length=150)
