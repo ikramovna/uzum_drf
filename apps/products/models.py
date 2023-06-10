@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.db import models
 from django.db.models import Model, CharField, IntegerField, TextField, ForeignKey, CASCADE, ImageField, DateTimeField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
@@ -41,7 +40,7 @@ class Product(Model):
 
 
 class Wishlist(Model):
-    product = ForeignKey('Product', CASCADE)
+    product = ForeignKey('apps.Product', CASCADE)
     user = ForeignKey('auth.User', CASCADE)
     created_at = DateTimeField(auto_now=True)
 
@@ -50,4 +49,11 @@ class Order(Model):
     user = ForeignKey('auth.User', CASCADE)
     product = ForeignKey(Product, CASCADE, 'order')
     quantity = IntegerField(default=1)
+
+
+class Basket(Model):
+    product = ForeignKey(Product, CASCADE, 'baskets')
+    quantity = IntegerField(default=1)
+    user = ForeignKey('auth.User', on_delete=CASCADE)
+
 
