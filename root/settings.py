@@ -23,11 +23,11 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     'mptt',
     'parler',
-    'modeltranslation',
 
 ]
 
 INSTALLED_APPS = [
+                     'modeltranslation',
                      'django.contrib.admin',
                      'django.contrib.auth',
                      'django.contrib.contenttypes',
@@ -145,7 +145,6 @@ CACHES = {
         }
     }
 }
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
