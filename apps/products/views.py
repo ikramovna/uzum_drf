@@ -63,6 +63,15 @@ class ProductDetailRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
 
+    # view
+    def retrieve(self, request, *args, **kwargs):
+        self.get_queryset()
+        instance = self.get_object()
+        instance.view_count += 1
+        instance.save()
+        serializer = ProductModelSerializer(instance)
+        return Response(serializer.data)
+
 
 # Category
 class CategoryCreateAPIView(ListCreateAPIView):
@@ -102,7 +111,3 @@ class WishListModelViewSet(ModelViewSet):
 class OrderCreateView(CreateAPIView):
     serializer_class = OrderModelSerializer
     queryset = Order.objects.all()
-
-
-
-
