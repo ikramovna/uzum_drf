@@ -64,3 +64,13 @@ class Basket(Model):
     product = ForeignKey(Product, CASCADE, 'baskets')
     quantity = IntegerField(default=1)
     user = ForeignKey('auth.User', on_delete=CASCADE)
+
+    def __str__(self):
+        return self.product
+
+
+class City(Model):
+    name = CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
