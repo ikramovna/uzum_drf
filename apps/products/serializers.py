@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.products.models import Product, ProductImage, Category, Wishlist, Order, ViewedProduct, Comment
+from apps.products.models import Product, ProductImage, Category, Wishlist, Order, ViewedProduct, Comment, Rating
 
 
 class ProductImageModelSerializer(ModelSerializer):
@@ -50,4 +50,10 @@ class SearchModelSerializer(ModelSerializer):
 class CommentModelSerializer(ModelSerializer):
     class Meta:
         model = Comment
+        exclude = ()
+
+
+class RatingModelSerializer(ModelSerializer):
+    class Meta:
+        model = Rating
         exclude = ()

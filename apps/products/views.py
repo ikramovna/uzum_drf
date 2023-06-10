@@ -7,9 +7,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import (ModelViewSet)
 
-from apps.products.models import (Product, Category, Wishlist, Order, ViewedProduct)
+from apps.products.models import (Product, Category, Wishlist, Order, ViewedProduct, Comment, Rating)
 from apps.products.serializers import (ProductModelSerializer, CategoryModelSerializer, WishListModelSerializer,
-                                       OrderModelSerializer, ViewedProductSerializer, SearchModelSerializer)
+                                       OrderModelSerializer, ViewedProductSerializer, SearchModelSerializer,
+                                       CommentModelSerializer, RatingModelSerializer)
 
 
 # Product
@@ -123,3 +124,11 @@ class ProductSearchAPIView(ListAPIView):
     search_fields = ['title', 'description']
 
 
+class CommentViewSet(ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentModelSerializer
+
+
+class RatingCreateView(ListCreateAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = RatingModelSerializer
