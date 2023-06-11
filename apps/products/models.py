@@ -37,6 +37,7 @@ class Product(Model):
     views = IntegerField(default=0)
     category = ForeignKey('Category', CASCADE)
     owner = ForeignKey('auth.User', CASCADE)
+    popularity = IntegerField(default=0)
 
     class Meta:
         indexes = [
@@ -103,6 +104,3 @@ class Rating(Model):
 
     def __str__(self):
         return self.user
-
-
-
