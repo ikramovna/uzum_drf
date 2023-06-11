@@ -60,6 +60,19 @@ class ProductModelViewSet(ModelViewSet):
         else:
             return Response(self.get_serializer(cache.get('data'), many=True).data)
 
+    # discount products
+    @action(detail=True, methods=['post'])
+    def discount(self, request, pk=None):
+        product = self.get_object()
+        discount_percentage = request.data.get('discount_percentage')
+        if discount_percentage is not None:
+            product.price -= (product.price * (discount_percentage / 100))
+            product.save()
+            return Response({'message': 'Discount applied successfully.'})
+        else:
+            return Response({'error': 'Please provide a valid discount percentage.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProductDetailRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
@@ -140,4 +153,3 @@ class RatingCreateView(ListCreateAPIView):
 class BasketModelViewSet(ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketModelSerializer
-
