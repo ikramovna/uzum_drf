@@ -19,6 +19,13 @@ class ProductModelViewSet(ModelViewSet):
     serializer_class = ProductModelSerializer
     pagination_class = PageNumberPagination
 
+    # Popular product
+    @action(detail=True, methods=['GET'])
+    def popular_product(self, request, pk=None):
+        popular_products = Product.objects.order_by('-popularity_score')[:10]  # Get top 10 products by popularity score
+        serializer = ProductModelSerializer(popular_products, many=True)
+        return Response(serializer.data)
+
     # Similar products
     @action(detail=True, methods=['GET'])
     def similar_products(self, request, pk=None):
