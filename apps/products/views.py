@@ -38,12 +38,9 @@ class ProductModelViewSet(ModelViewSet):
     @action(detail=True, methods=['POST'])
     def mark_viewed(self, request, pk=None):
         product = self.get_object()
-
         user = request.user
-
         viewed_product = ViewedProduct(user=user, product=product)
         viewed_product.save()
-
         serializer = ViewedProductSerializer(viewed_product)
         return Response(serializer.data)
 
@@ -52,10 +49,8 @@ class ProductModelViewSet(ModelViewSet):
     def add_discount(self, request, pk=None):
         product = self.get_object()
         discount = request.data.get('discount')
-
         product.price -= discount
         product.save()
-
         serializer = self.get_serializer(product)
         return Response(serializer.data)
 
