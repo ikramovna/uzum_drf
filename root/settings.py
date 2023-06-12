@@ -14,8 +14,8 @@ load_dotenv()
 ALLOWED_HOSTS = ['*']
 
 MY_APPS = [
-    # 'apps.users',
-    'apps.products'
+    'apps.users',
+    'apps.products',
 ]
 
 THIRD_PARTY_APPS = [
@@ -23,6 +23,7 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     'mptt',
     'parler',
+    'django_filters',
 
 ]
 
@@ -147,6 +148,9 @@ CACHES = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
 }
