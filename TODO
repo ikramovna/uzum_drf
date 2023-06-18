@@ -18,4 +18,4 @@ Basket ✅
 Additional functions
 Index ✅
 Cache - django redis cache ✅
-Permission - IsAdminOrReadOnly, AllowAny, IsAuthenticated
+Permission - IsAdminOrReadOnly, AllowAny, IsAuthenticated ✅

@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-l*qm976&$dry)d2-h(^0zl$zu$wyl%t=xda6!8vyl^zjdrj$p*'
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -81,20 +83,20 @@ DATABASES = {
     }
 }
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.accounts.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.accounts.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.accounts.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.accounts.password_validation.NumericPasswordValidator',
-#     },
-# ]
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.accounts.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.accounts.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.accounts.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.accounts.password_validation.NumericPasswordValidator',
+    },
+]
 
 LANGUAGE_CODE = 'en-us'
 
@@ -125,18 +127,9 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_FILTER_BACKENDS': [
-#         'django_filters.rest_framework.DjangoFilterBackend'
-#     ],
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ),
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-#     'PAGE_SIZE': 10
-# }
 
 # Cache Config
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -146,6 +139,8 @@ CACHES = {
         }
     }
 }
+
+# DRF Config
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
