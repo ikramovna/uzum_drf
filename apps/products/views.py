@@ -154,13 +154,15 @@ class CommentViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
+# Basket
+class BasketModelViewSet(ModelViewSet):
+    queryset = Basket.objects.all()
+    serializer_class = BasketModelSerializer
+
+
 # Rating
 class RatingCreateView(ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingModelSerializer
 
 
-# Basket
-class BasketModelViewSet(ModelViewSet):
-    queryset = Basket.objects.all()
-    serializer_class = BasketModelSerializer
