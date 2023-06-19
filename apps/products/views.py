@@ -55,16 +55,6 @@ class ProductModelViewSet(ModelViewSet):
         serializer = ViewedProductSerializer(viewed_product)
         return Response(serializer.data)
 
-    # discount
-    @action(detail=True, methods=['POST'])
-    def add_discount(self, request, pk=None):
-        product = self.get_object()
-        discount = request.data.get('discount')
-        product.price -= discount
-        product.save()
-        serializer = self.get_serializer(product)
-        return Response(serializer.data)
-
     # cache
     def list(self, request, *args, **kwargs):
         if cache.get('data') is None:
