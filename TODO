@@ -21,3 +21,4 @@ Cache - django redis cache ✅
 Permission - IsAdminOrReadOnly, AllowAny, IsAuthenticated ✅
 
 
+salom
