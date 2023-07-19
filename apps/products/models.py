@@ -19,7 +19,7 @@ class Category(MPTTModel):
 
 
 class ProductImage(Model):
-    image = ImageField(upload_to='products/images/')
+   
     products = ForeignKey('Product', CASCADE)
 
     def __str__(self):
