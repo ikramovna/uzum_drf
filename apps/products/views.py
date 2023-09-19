@@ -138,6 +138,18 @@ class OrderCreateView(CreateAPIView):
     queryset = Order.objects.all()
 
 
+# Basket
+class BasketModelViewSet(ModelViewSet):
+    queryset = Basket.objects.all()
+    serializer_class = BasketModelSerializer
+
+
+# Rating
+class RatingCreateView(ListCreateAPIView):
+    queryset = Rating.objects.all()
+    serializer_class = RatingModelSerializer
+
+
 # Search
 class ProductSearchAPIView(ListAPIView):
     queryset = Product.objects.all()
@@ -152,17 +164,3 @@ class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentModelSerializer
     permission_classes = [IsAuthenticated]
-
-
-# Basket
-class BasketModelViewSet(ModelViewSet):
-    queryset = Basket.objects.all()
-    serializer_class = BasketModelSerializer
-
-
-# Rating
-class RatingCreateView(ListCreateAPIView):
-    queryset = Rating.objects.all()
-    serializer_class = RatingModelSerializer
-
-
