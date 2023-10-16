@@ -1,16 +1,12 @@
 Login ✅
 ModelTranslation uz, en, ru ✅
 Product, ProductDetail, Similar products  ✅
-Product Filter by price color ✅
-Products viewed ✅
+Filter ✅
 Category ✅
 Wishlist ✅
-View ✅
 Search ✅
 Comment ✅
-city model - name ✅
-rating ✅
-pagination ✅
+Rating ✅
 Order ✅
 Basket ✅
 
@@ -18,6 +14,6 @@ Basket ✅
 Additional functions
 Index ✅
 Cache - django redis cache ✅
-Permission - IsAdminOrReadOnly, AllowAny, IsAuthenticated ✅
+Custom Permission ✅
 
 
