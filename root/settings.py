@@ -30,15 +30,15 @@ THIRD_PARTY_APPS = [
 ]
 
 INSTALLED_APPS = [
-                     'modeltranslation',
-                     'django.contrib.admin',
-                     'django.contrib.auth',
-                     'django.contrib.contenttypes',
-                     'django.contrib.sessions',
-                     'django.contrib.messages',
-                     'django.contrib.staticfiles',
+     'modeltranslation',
+     'django.contrib.admin',
+     'django.contrib.auth',
+     'django.contrib.contenttypes',
+     'django.contrib.sessions',
+     'django.contrib.messages',
+     'django.contrib.staticfiles',
 
-                 ] + MY_APPS + THIRD_PARTY_APPS
+ ] + MY_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
