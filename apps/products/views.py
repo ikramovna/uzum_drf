@@ -23,7 +23,7 @@ class IsAdminOrReadOnly(BasePermission):
         return request.user and request.user.is_staff
 
 
-# Product
+
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductModelSerializer
@@ -95,14 +95,13 @@ class ProductDetailRetrieveAPIView(RetrieveAPIView):
         return Response(serializer.data)
 
 
-# Category
+
 class CategoryCreateAPIView(ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryModelSerializer
     permission_classes = [IsAdminOrReadOnly]
 
 
-# WishList
 class WishListModelViewSet(ModelViewSet):
     queryset = Wishlist.objects.all()
     serializer_class = WishListModelSerializer
@@ -132,25 +131,25 @@ class WishListModelViewSet(ModelViewSet):
         instance.delete()
 
 
-# Order
+
 class OrderCreateView(CreateAPIView):
     serializer_class = OrderModelSerializer
     queryset = Order.objects.all()
 
 
-# Basket
+
 class BasketModelViewSet(ModelViewSet):
     queryset = Basket.objects.all()
     serializer_class = BasketModelSerializer
 
 
-# Rating
+
 class RatingCreateView(ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingModelSerializer
 
 
-# Search
+
 class ProductSearchAPIView(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = SearchModelSerializer
@@ -159,7 +158,7 @@ class ProductSearchAPIView(ListAPIView):
     permission_classes = [AllowAny]
 
 
-# Comment
+
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentModelSerializer
